@@ -5,14 +5,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import io.quarkus.runtime.ShutdownEvent;
+import io.quarkus.runtime.StartupEvent;
+import io.smallrye.common.annotation.Identifier;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
-
-import io.quarkus.runtime.ShutdownEvent;
-import io.quarkus.runtime.StartupEvent;
 
 /**
  * A bean producing random prices every 5 seconds and sending them to the prices JMS queue.
@@ -21,6 +21,7 @@ import io.quarkus.runtime.StartupEvent;
 public class PriceProducer implements Runnable {
 
     @Inject
+    @Identifier("<default>")
     ConnectionFactory connectionFactory;
 
     private final Random random = new Random();

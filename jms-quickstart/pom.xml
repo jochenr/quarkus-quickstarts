@@ -11,12 +11,13 @@
         <maven.compiler.source>17</maven.compiler.source>
         <surefire-plugin.version>3.1.2</surefire-plugin.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.15.1</quarkus.platform.version>
+		<quarkus.platform.group-id>com.redhat.quarkus.platform</quarkus.platform.group-id>
+		<!-- <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id> -->
+		<quarkus.platform.version>3.8.6.redhat-00005</quarkus.platform.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <quarkus-artemis.version>3.4.1</quarkus-artemis.version>
+        <quarkus-artemis.version>3.2.4</quarkus-artemis.version>
 
         <!-- Tests are unstable -->
         <skipTests>true</skipTests>
@@ -32,6 +33,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- just by putting this the Artemis Healthcheck does not work any more: -->
+             <!-- -->
+            <dependency>
+				<groupId>${quarkus.platform.group-id}</groupId>
+				<artifactId>quarkus-camel-bom</artifactId>
+				<version>${quarkus.platform.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+            
             <dependency>
                 <groupId>io.quarkiverse.artemis</groupId>
                 <artifactId>quarkus-artemis-bom</artifactId>
@@ -49,8 +60,16 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest</artifactId>
+            <!-- <artifactId>quarkus-rest</artifactId> -->
+            <artifactId>quarkus-resteasy</artifactId>
         </dependency>
+
+        <dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-smallrye-health</artifactId>
+		</dependency>
+
+
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>

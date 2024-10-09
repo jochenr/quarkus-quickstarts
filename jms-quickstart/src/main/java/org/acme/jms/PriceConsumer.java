@@ -3,6 +3,9 @@ package org.acme.jms;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import io.quarkus.runtime.ShutdownEvent;
+import io.quarkus.runtime.StartupEvent;
+import io.smallrye.common.annotation.Identifier;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
@@ -12,9 +15,6 @@ import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 
-import io.quarkus.runtime.ShutdownEvent;
-import io.quarkus.runtime.StartupEvent;
-
 /**
  * A bean consuming prices from the JMS queue.
  */
@@ -22,6 +22,7 @@ import io.quarkus.runtime.StartupEvent;
 public class PriceConsumer implements Runnable {
 
     @Inject
+    @Identifier("<default>")
     ConnectionFactory connectionFactory;
 
     private final ExecutorService scheduler = Executors.newSingleThreadExecutor();
